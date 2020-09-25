@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [todos, setTodos] = useState([
+    "hulk",
+    "iron_man",
+    "perman",
+    "powerup_girls",
+  ]); //in short term memory record
+  const [input, setInput] = useState("");
+  const addTodo = (event) => {
+    event.preventDefault(); //will stop the REFRESH
+    setTodos([...todos, input]);
+    setInput("");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Amit Todo List</h1>
+      <form>
+        <input
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+        />
+        <button type="submit" onClick={addTodo}>
+          Add TO
+        </button>
+      </form>
+      <ul>
+        {todos.map((todo) => (
+          <li>{todo}</li>
+        ))}
+      </ul>
     </div>
   );
 }
